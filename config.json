@@ -1,0 +1,15 @@
+{
+    "REDIS_IPADDRESS_FLOWER": "127.0.0.1",
+    "REDIS_IPADDRESS_DATA": "127.0.0.1",
+    "REDIS_PORT_FLOWER": 6379,
+    "REDIS_PORT_DATA": 6379,
+    "REDIS_DBNAME_BROKER": 0,
+    "REDIS_DBNAME_BACKEND": 1,
+    "SCRAPYD_ADDRESS": "127.0.0.1:6800",
+    "MONGODB_IPADDRESS": "127.0.0.1",
+    "MONGODB_PORT": 27017,
+    "SUNFLOWER_START_URLS": [
+        "http://blog.sina.com.cn/",
+        "http://news.163.com"
+    ]
+}

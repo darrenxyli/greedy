@@ -1,0 +1,14 @@
+{
+  "name": "Hive",
+  "version": "0.0.0",
+  "description": "DB for Greedy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Darren Xinyang Li <darren.xyli@gmail.com> (http://touchlike.me/)",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose":"3.8.7"
+  }
+}

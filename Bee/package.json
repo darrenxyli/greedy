@@ -1,0 +1,35 @@
+{
+  "name": "Bee",
+  "version": "0.0.0",
+  "description": "scraper for Greedy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Darren Xinyang Li <lixinyang920304@gmail.com> (http://touchlike.me/)",
+  "license": "ISC",
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "node-getopt": "~0.2.3",
+    "express": "3.x",
+    "colors": "*",
+    "request": "2.*.*",
+    "moment": "~2.4.0",
+    "zlib": "~1.0.5",
+    "fibers": "~1.0.1",
+    "string": "1.8.0",
+    "jquery": "2.1.0",
+    "archiver": "~0.5.2",
+    "jsdom": "0.10.1",
+    "casperjs": "*",
+    "feedparser":"0.16.6",
+    "request":"2.33.0",
+    "bufferhelper":"0.2.0",
+    "cheerio":"0.13.1",
+    "async":"0.2.10",
+    "iconv":"2.0.7",
+    "iconv-lite":"0.2.11",
+    "system": "*",
+    "mongoose": "*"
+  }
+}

@@ -1,0 +1,3 @@
+[submodule "heimdallr"]
+	path = heimdallr
+	url = git@github.com-darrenxyli:cube2matrix/Heimdallr.git

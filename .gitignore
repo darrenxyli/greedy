@@ -1,0 +1,9 @@
+*.pyc
+*.log
+*.pid
+project.egg-info/
+build/
+dbs/
+Sunflower/setup.py
+.DS_Store
+eggs/
