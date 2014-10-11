@@ -2,7 +2,7 @@ Greedy
 ======
 
 Self Undergradute Work
-
+(open source now)
 1.queen.py: It is the controler of whole scraper engine. like a Queen Bee
 
 2.Sunflower: It is the front-end scraper like a sunflower to get init information on website
