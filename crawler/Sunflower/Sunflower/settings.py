@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'Sunflower.spiders'
 SCHEDULER_ORDER = 'BFO'
 DEFAULT_ITEM_CLASS = 'Sunflower.items.SunflowerItem'
 
-ITEM_PIPELINES = {'Sunflower.pipelines.SunflowerPipeline':1000}
+#ITEM_PIPELINES = {'Sunflower.pipelines.SunflowerPipeline':1000}
 
 # Download Delay, for not download too quick
 DOWNLOAD_DELAY = 2
