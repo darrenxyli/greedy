@@ -18,7 +18,7 @@ class DroneSpider(BaseSpider):
 
     def parse(self, response):
         hxs = HtmlXPathSelector(response)
-        links = hxs.select(u'//a/img/@src').extract()
+        links = hxs.select('//a/img/@src').extract()
         for link in links:
             item = SunflowerItem()
             item['URL'] = link
