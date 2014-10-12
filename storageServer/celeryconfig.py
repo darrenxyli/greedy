@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
+
+CELERY_TASK_RESULT_EXPIRES = 3600 * 24 * 3
+
+CELERY_IMPORTS = ['captain']
+
+CELERYD_PREFETCH_MULTIPLIER = 16
+
+CELERYD_CONCURRENCY = 8
+
+CELERYD_NODES = "worker1 worker2 worker3"
