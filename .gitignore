@@ -7,3 +7,4 @@ dbs/
 Sunflower/setup.py
 .DS_Store
 eggs/
+*/node_modules/
