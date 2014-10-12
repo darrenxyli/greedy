@@ -1,5 +1,5 @@
 flower
-Scrapy==0.22.2
+Scrapy==0.24
 scrapyd
 celery[redis]
 kombu==3.0.12
