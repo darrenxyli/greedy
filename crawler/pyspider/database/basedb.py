@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 # vim: set et sw=4 ts=4 sts=4 ff=unix fenc=utf8:
 # Author: Binux<i@binux.com>
-#         http://binux.me
+#         http://www.darrenxyli.com
 # Created on 2012-08-30 17:43:49
 
 import logging

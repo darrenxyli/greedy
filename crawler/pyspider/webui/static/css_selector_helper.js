@@ -1,6 +1,6 @@
 // vim: set et sw=2 ts=2 sts=2 ff=unix fenc=utf8:
-// Author: Binux<i@binux.me>
-//         http://binux.me
+// Author: darrenxyli<darren.xyli@gmail.com>
+//         http://www.darrenxyli.com
 // Created on 2013-11-11 18:50:58
  
 (function(){

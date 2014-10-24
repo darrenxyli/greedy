@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 # vim: set et sw=4 ts=4 sts=4 ff=unix fenc=utf8:
 # Author: Binux<17175297.hk@gmail.com>
-#         http://binux.me
+#         http://www.darrenxyli.com
 # Created on 2012-11-15 17:27:54
 
 import time
