@@ -1,7 +1,7 @@
 /*init the engine*/
 var engine = require('./lib/engine');
 var Getopt = require('node-getopt');
-var mondb = require('../Hive/postService').MonnodeObj;
+//var mondb = require('../Hive/postService').MonnodeObj;
 var utils = require('./lib/spiderUtil');
 var cheerio = require('cheerio');
 
@@ -25,7 +25,7 @@ if (!Object.keys(opt.options).length) {
 
 /* init the obj */
 var E = engine({'loadImages':false, 'localToRemoteUrlAccessEnabled':false}, '/Users/xinyang/Documents', '/Users/xinyang/Documents');
-var DB = new mondb();
+//var DB = new mondb();
 
 /*crawl the data*/
 if (opt.options.url) {
@@ -42,10 +42,10 @@ if (opt.options.url) {
 			console.log(title);
 			var content = $('body').text();
 			console.log(content);
-            DB.savePost(title, URL, content);
+            //DB.savePost(title, URL, content);
 		}
 	);
-    DB.Close();
+    //DB.Close();
 	E.Then(function() {
 		E.Exit(1, 'bye');
 	})
