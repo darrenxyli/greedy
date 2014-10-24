@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-# vim: set et sw=4 ts=4 sts=4 ff=unix fenc=utf8:
-# Author: Binux<i@binux.me>
-#         http://binux.me
-# Created on 2014-02-07 13:12:10
+# Author: darrenxyli<darren.xyli@gmail.com>
+#         http://www.darrenxyli.com
 
 import time
 import heapq
@@ -14,7 +12,7 @@ from UserDict import DictMixin
 from token_bucket import Bucket
 
 
-class InQueueTask(DictMixin):
+class InQueueTask():
     __slots__ = ('taskid', 'priority', 'exetime')
     __getitem__ = lambda *x: getattr(*x)
     __setitem__ = lambda *x: setattr(*x)
@@ -78,7 +76,7 @@ class TaskQueue(object):
     task queue for scheduler, have a priority queue and a time queue for delayed tasks
     '''
     processing_timeout = 10*60
-    def __init__(self, rate=0, burst=0):
+    def __init__(self, rate=1, burst=None):
         self.mutex = threading.Lock()
         self.priority_queue = PriorityTaskQueue()
         self.time_queue = PriorityTaskQueue()
@@ -183,6 +181,7 @@ if __name__ == '__main__':
     task_queue.put('a3', 3, time.time()+0.1)
     task_queue.put('a1', 1)
     task_queue.put('a2', 2)
+    assert len(task_queue) == 3
     assert task_queue.get() == 'a2'
     time.sleep(0.1)
     task_queue._check_time_queue()

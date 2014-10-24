@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-# vim: set et sw=4 ts=4 sts=4 ff=unix fenc=utf8:
-# Author: Binux<i@binux.me>
-#         http://binux.me
-# Created on 2014-02-07 16:53:08
+# Author: darrenxyli<darren.xyli@gmail.com>
+#         http://www.darrenxyli.com
 
 import time
 try:
@@ -11,6 +9,10 @@ try:
 except ImportError:
     import dummy_threading as _threading
 
+'''
+rate: # of pages that crawled per second
+burst: concurrency, equal the size of token bucket
+'''
 class Bucket(object):
     '''
     traffic flow control with token bucket
