@@ -10,3 +10,4 @@ nltk
 mongoengine
 mrq
 flask-restful>=0.2.12
+redis
