@@ -1,7 +1,5 @@
-flower
 Scrapy==0.24
 scrapyd
-celery[redis]
 kombu==3.0.12
 Pillow
 lxml
@@ -10,3 +8,4 @@ jieba
 beautifulsoup
 nltk
 mongoengine
+mrq
