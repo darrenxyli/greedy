@@ -10,7 +10,7 @@ import os
 import redis
 import json
 
-filePath = os.path.abspath('.') + "/../config.json"
+filePath = os.path.dirname(os.path.abspath(__file__)) + "/../config.json"
 with open(filePath) as f:
     config = json.load(f)
 
