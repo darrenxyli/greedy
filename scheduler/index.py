@@ -6,10 +6,12 @@
 from flask import Flask
 from flask.ext import restful
 from flask.ext.restful import reqparse
+import os
 import redis
 import json
 
-with open('../config.json') as f:
+filePath = os.path.abspath('.') + "/../config.json"
+with open(filePath) as f:
     config = json.load(f)
 
 pool = redis.ConnectionPool(
