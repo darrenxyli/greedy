@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-# Website: http://www.darrenxyli.com
-# Author: darrenxyli<darren.xyli.com>
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+# @Author: darrenxyli <www.darrenxyli.com>
+# @Date:   2014-10-29 01:32:29
+# @Last Modified by:   darrenxyli
+# @Last Modified time: 2014-10-29 01:35:31
 
 from flask import Flask
 from flask.ext import restful
@@ -28,9 +30,12 @@ parser = reqparse.RequestParser()
 parser.add_argument('data', type=str)
 parser.add_argument('project', type=str)
 
+
 class taskPost(restful.Resource):
+
     def get(self):
         return "POST ONLY", 400
+
     def post(self):
         args = parser.parse_args()
         data = args['data']
@@ -38,7 +43,9 @@ class taskPost(restful.Resource):
         r.sadd(project, data)
         return data, 200
 
+
 class taskGet(restful.Resource):
+
     def get(self, project):
         return r.spop(project), 200
 
