@@ -8,6 +8,7 @@ jieba
 beautifulsoup
 nltk
 mongoengine
-mrq
 flask-restful>=0.2.12
+requests
+rq
 redis

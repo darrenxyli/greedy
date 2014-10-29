@@ -3,25 +3,14 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 01:32:29
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-29 01:35:31
+# @Last Modified time: 2014-10-29 18:21:32
 
 from flask import Flask
 from flask.ext import restful
 from flask.ext.restful import reqparse
-import os
-import redis
-import json
+from libs.db.redis.taskDB import taskDB
 
-filePath = os.path.dirname(os.path.abspath(__file__)) + "/../config.json"
-with open(filePath) as f:
-    config = json.load(f)
-
-pool = redis.ConnectionPool(
-    host=config["REDIS_IPADDRESS_TASK"],
-    port=config["REDIS_PORT_TASK"],
-    db=config["REDIS_DBNAME_BROKER"]
-)
-r = redis.Redis(connection_pool=pool)
+r = taskDB().connection
 
 app = Flask(__name__)
 api = restful.Api(app)
