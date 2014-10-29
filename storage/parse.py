@@ -4,6 +4,8 @@ import json
 
 # @class: Setting
 # @Description: parse the configFile
+
+
 class Setting(object):
 
     __config = None
@@ -12,7 +14,6 @@ class Setting(object):
         configFile = open(configpath).read()
         configObj = json.loads(configFile)
         self.config = configObj
-
 
     def getConfig(self):
         return self.__config
