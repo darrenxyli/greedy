@@ -2,6 +2,8 @@ from colorama import Fore
 
 # @Method: red()
 # @Description: return a string with red color
+
+
 def red(s):
     return Fore.RED + s + Fore.RESET
 
