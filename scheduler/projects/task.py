@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 19:58:28
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-29 23:15:33
+# @Last Modified time: 2014-10-30 16:37:56
 
 import requests
 import json
@@ -12,7 +12,7 @@ import os
 from libs.process import run_in_thread
 from downloader.imgDowloader import imgDownload
 
-def HaixiuzuPro(url, path):
+def Task(url, path):
     resp = requests.get(url)
     jsonStr = json.loads(resp.text.encode('utf-8'))
     jsonAttrs = json.loads(jsonStr)

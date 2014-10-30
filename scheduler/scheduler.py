@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 17:00:26
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-30 02:28:51
+# @Last Modified time: 2014-10-30 16:38:06
 
 import time
 import logging
@@ -56,9 +56,9 @@ class Scheduler(object):
 
     def _push_rq(self, project, taskid):
         q = Queue('{project}_task'.format(project=project))
-        from .projects.haixiuzuProject import HaixiuzuPro
+        from .projects.task import Task
         result = q.enqueue(
-            HaixiuzuPro,
+            Task,
             'http://{ip}:{port}/{version}/{project}'.format(
                 ip=self.config['SCHEDULER_IPADDRESS'],
                 port=self.config['SCHEDULER_PORT'],
