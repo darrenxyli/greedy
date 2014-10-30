@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 20:42:41
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-29 23:25:54
+# @Last Modified time: 2014-10-30 02:19:12
 import time
 import os
 
@@ -15,7 +15,8 @@ from libs.process import run_in_subprocess
 class g(object):
     config = Config().getSettings()
     taskDBConn = taskDB().connection
-    downloadPath = os.path.dirname(os.path.abspath(__file__)) + "/data/"
+    # downloadPath = os.path.split(os.path.realpath(__file__))[0] + "/data/"
+    downloadPath = "../greedy/data/"
 
 def runAPI(g=g):
     from scheduler.api import app
