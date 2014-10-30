@@ -8,5 +8,8 @@
     "MONGODB_IPADDRESS_DATA": "127.0.0.1",
     "MONGODB_PORT_DATA": 27017,
     "SCHEDULER_IPADDRESS": "104.131.67.77",
-    "SCHEDULER_PORT": 3344
+    "SCHEDULER_PORT": 3344,
+    "PROJECTS": [
+        "haixiuzu"
+    ]
 }

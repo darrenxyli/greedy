@@ -3,13 +3,13 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 01:32:29
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-29 20:21:55
+# @Last Modified time: 2014-10-29 20:50:01
 
 from flask import Flask
 from flask.ext import restful
 from flask.ext.restful import reqparse
 
-from libs.db.redis.taskDB import taskDB
+from libs.taskDB import taskDB
 
 taskConn = taskDB().connection
 

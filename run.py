@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 20:42:41
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-29 21:34:21
+# @Last Modified time: 2014-10-29 23:14:14
 import time
 
 from libs.config import Config
@@ -14,6 +14,7 @@ from libs.process import run_in_subprocess
 class g(object):
     config = Config().getSettings()
     taskDBConn = taskDB().connection
+    downloadPath = "~/download/"
 
 def runAPI(g=g):
     from scheduler.api import app
