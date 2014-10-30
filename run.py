@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 20:42:41
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-30 02:19:12
+# @Last Modified time: 2014-10-30 02:31:51
 import time
 import os
 
@@ -31,7 +31,7 @@ def runScheduler(g=g):
 
 def runAllService():
     threads = []
-    #threads.append(run_in_subprocess(runAPI, g=g))
+    threads.append(run_in_subprocess(runAPI, g=g))
     threads.append(run_in_subprocess(runScheduler, g=g))
 
     while True:
