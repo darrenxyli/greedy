@@ -3,7 +3,7 @@
 # @Author: darrenxyli <www.darrenxyli.com>
 # @Date:   2014-10-29 17:00:26
 # @Last Modified by:   darrenxyli
-# @Last Modified time: 2014-10-30 02:20:28
+# @Last Modified time: 2014-10-30 02:28:51
 
 import time
 import logging
@@ -20,7 +20,7 @@ class Scheduler(object):
     INQUEUE_LIMIT = 0
     EXCEPTION_LIMIT = 3
     DELETE_TIME = 24 * 60 * 60
-    UPDATE_TASKID_INTERVAL = 1
+    UPDATE_TASKID_INTERVAL = 3
 
     def __init__(self, g):
         self.g = g
@@ -52,6 +52,7 @@ class Scheduler(object):
             self._update_project(project)
             print "[project {name}] project loaded.".format(name=project)
         self._last_update_project = time.time()
+        self.taskId += self.UPDATE_TASKID_INTERVAL
 
     def _push_rq(self, project, taskid):
         q = Queue('{project}_task'.format(project=project))
@@ -81,9 +82,9 @@ class Scheduler(object):
         self.taskId += self.UPDATE_TASKID_INTERVAL
 
     def _update_project(self, project):
-        self.task_queue[project].check_update()
         for tId in xrange(self.taskId, self.taskId + self.UPDATE_TASKID_INTERVAL):
             self.task_queue[project].put(tId, 1)
+        self.task_queue[project].check_update()
 
     def _start_control(self):
         with Connection(self.taskdb):
