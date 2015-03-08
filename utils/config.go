@@ -1,4 +1,4 @@
-package config
+package utils
 
 import (
 	"code.google.com/p/gcfg"

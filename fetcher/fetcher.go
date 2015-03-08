@@ -1,12 +1,15 @@
 package fetcher
 
 import (
+	"fmt"
 	"html"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
 	"regexp"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 type jobResult struct {
@@ -17,6 +20,19 @@ type jobResult struct {
 type uRLResult struct {
 	URL    string
 	Images []string
+}
+
+func ExampleScrape() {
+	doc, err := goquery.NewDocument("http://4porn.com/popular/43/beauty/1.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	doc.Find("UL.thumbs2>LI").Each(func(i int, s *goquery.Selection) {
+		band := s.Find(".site").Text()
+		title := s.Find("h3").Text()
+		fmt.Printf("Review %d: %s - %s\n", i, band, title)
+	})
 }
 
 func CrawlURL(urlToCrawl string) {
