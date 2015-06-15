@@ -1,9 +1,8 @@
 package redis
 
 import (
-	"strings"
-
 	"github.com/garyburd/redigo/redis"
+	"strings"
 )
 
 // Client is client of redis
@@ -42,10 +41,20 @@ func (client *Client) Put(dbName string, value interface{}) {
 }
 
 // Get is lpop
-func (client *Client) Get(dbName string) {
+func (client *Client) Get(dbName string) (string, error) {
 	c := client.Pool.Get()
 
 	defer c.Close()
 
-	c.Do("LPOP", dbName)
+	return redis.String(c.Do("LPOP", dbName))
+}
+
+// QueueSize get the size of queue
+func (client *Client) QueueSize(dbName string) (int, error) {
+
+	c := client.Pool.Get()
+
+	defer c.Close()
+
+	return redis.Int(c.Do("LLEN", dbName))
 }

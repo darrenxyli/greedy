@@ -5,112 +5,82 @@ import (
 	"runtime"
 	"sync"
 
+	"github.com/darrenxyli/greedy/database/postgre"
 	dedis "github.com/darrenxyli/greedy/database/redis"
-	"github.com/garyburd/redigo/redis"
+	_ "github.com/lib/pq"
 )
 
 // 生成连接池
-var pool = dedis.NewPool("192.80.146.5", "6379")
 
-func publish(channel, value interface{}) {
-	c := pool.Get()
-	defer c.Close()
-	c.Do("PUBLISH", channel, value)
+var redisClient = dedis.NewClient("192.80.146.5", "6379")
+
+func put(wg *sync.WaitGroup, value string) {
+	for i := 1; i < 10; i++ {
+		redisClient.Put("test", value)
+	}
+	wg.Done()
+}
+
+func get(wg *sync.WaitGroup) {
+
+	for i := 1; i < 10; i++ {
+		value, error := redisClient.Get("test")
+
+		if error != nil {
+			i--
+		} else {
+			fmt.Println(value)
+		}
+	}
+	wg.Done()
 }
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	c := pool.Get()
+	// var wg sync.WaitGroup
+	//
+	// wg.Add(1)
+	// go put(&wg, "run")
+	//
+	// time.Sleep(time.Second)
+	//
+	// len, _ := redisClient.QueueSize("test")
+	//
+	// fmt.Println(len)
+	//
+	// wg.Add(1)
+	// go get(&wg)
+	//
+	// wg.Wait()
 
-	defer c.Close()
-	var wg sync.WaitGroup
-	wg.Add(2)
+	//= This initiates a form session to the database. see Open
 
-	psc := redis.PubSubConn{Conn: c}
+	taskDB := postgre.NewTaskDB(
+		"amazon.cbtwp3cmfmsx.us-west-2.rds.amazonaws.com",
+		5432,
+		"taskdb",
+		"darrenxyli",
+		"2jaqx97j",
+		[]string{"test"})
 
-	// This goroutine receives and prints pushed notifications from the server.
-	// The goroutine exits when the connection is unsubscribed from all
-	// channels or there is an error.
-	go func() {
-		defer wg.Done()
-		for {
-			switch n := psc.Receive().(type) {
-			case redis.Message:
-				fmt.Printf("Sub1: Message: %s %s\n", n.Channel, n.Data)
-			case redis.PMessage:
-				fmt.Printf("PMessage: %s %s %s\n", n.Pattern, n.Channel, n.Data)
-			case redis.Subscription:
-				fmt.Printf("Subscription: %s %s %d\n", n.Kind, n.Channel, n.Count)
-				if n.Count == 0 {
-					return
-				}
-			case error:
-				fmt.Printf("error: %v\n", n)
-				return
-			}
-		}
-	}()
+	// test connection with
+	// MyGorm.SingularTable(true)
 
-	go func() {
-		defer wg.Done()
-		for {
-			switch n := psc.Receive().(type) {
-			case redis.Message:
-				fmt.Printf("Sub2: Message: %s %s\n", n.Channel, n.Data)
-			case redis.PMessage:
-				fmt.Printf("PMessage: %s %s %s\n", n.Pattern, n.Channel, n.Data)
-			case redis.Subscription:
-				fmt.Printf("Subscription: %s %s %d\n", n.Kind, n.Channel, n.Count)
-				if n.Count == 0 {
-					return
-				}
-			case error:
-				fmt.Printf("error: %v\n", n)
-				return
-			}
-		}
-	}()
+	// MyGorm.CreateTable(&task.Task{})
 
-	// This goroutine manages subscriptions for the connection.
-	go func() {
-		defer wg.Done()
+	// taskItem := task.NewTask()
+	//
+	// taskDB.Insert(taskItem)
+	// //
+	// // MyGorm.NewRecord(taskItem)
+	// //
+	// // MyGorm.Create(&taskItem)
+	//
+	// var user = new(task.Task)
+	//
+	// taskDB.Get("test", user)
+	// fmt.Println(user.Project)
 
-		psc.Subscribe("example")
+	taskDB.LoadTasks("ACTIVE", "test", 10)
 
-		// The following function calls publish a message using another
-		// connection to the Redis server.
-
-		publish("example", "hello")
-		publish("example", "world")
-
-		for index := 0; index < 100; index++ {
-			publish("example", index)
-		}
-
-		// Unsubscribe from all connections. This will cause the receiving
-		// goroutine to exit.
-		psc.Unsubscribe()
-	}()
-
-	go func() {
-		defer wg.Done()
-
-		psc.Subscribe("example")
-
-		// The following function calls publish a message using another
-		// connection to the Redis server.
-
-		publish("example", "hello")
-		publish("example", "world")
-
-		for index := 0; index < 200; index++ {
-			publish("example", index)
-		}
-
-		// Unsubscribe from all connections. This will cause the receiving
-		// goroutine to exit.
-		psc.Unsubscribe()
-	}()
-
-	wg.Wait()
 }
