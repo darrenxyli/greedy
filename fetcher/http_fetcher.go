@@ -243,3 +243,8 @@ func (downloader *HTTPDownloader) downloadText(page *page.Page, req *request.Req
 	page.SetBodyStr(destbody).SetStatus(false, "")
 	return page
 }
+
+// getTasks get tasks
+func (downloader *HTTPDownloader) getTasks() {
+     mlog.LogInst().LogError("good")
+}

@@ -33,3 +33,14 @@ func (scheduler *Scheduler) Run() {
 func (scheduler *Scheduler) updateTasks() {
      fmt.Println("god test")
 }
+
+// AddTask addes new tasks
+func (scheduler *Scheduler) AddTask(URL string)
+{
+	fmt.Println("add task")
+}
+
+// SendTask sends tasks
+func (scheduler *Scheduler) SendTask() {
+     fmt.Println("sned tasks to queue")
+}
