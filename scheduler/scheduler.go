@@ -28,3 +28,8 @@ func (scheduler *Scheduler) loadTasks() {
 func (scheduler *Scheduler) Run() {
 	fmt.Println("Run")
 }
+
+// UpdateTask
+func (scheduler *Scheduler) updateTasks() {
+     fmt.Println("god test")
+}
