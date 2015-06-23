@@ -38,7 +38,7 @@ func NewResultDB(host string, port int, database string, user string, passwd str
 	// Then can invoke `*sql.DB`'s functions with it such as
 	db.DB().Ping()
 	db.DB().SetMaxIdleConns(10)
-	db.DB().SetMaxOpenConns(100)
+	db.DB().SetMaxOpenConns(1000)
 
 	for _, name := range projects {
 		db.Table(GenerateTabelName(name)).CreateTable(&result.Result{})
