@@ -2,9 +2,9 @@
 package util
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/xml"
-	"fmt"
-	"hash/crc32"
 	"io"
 	"os"
 	"regexp"
@@ -98,10 +98,9 @@ func XML2mapstr(xmldoc string) map[string]string {
 	return m
 }
 
-//string to hash
+// MakeHash string to hash
 func MakeHash(s string) string {
-	const IEEE = 0xedb88320
-	var IEEETable = crc32.MakeTable(IEEE)
-	hash := fmt.Sprintf("%x", crc32.Checksum([]byte(s), IEEETable))
-	return hash
+	hasher := md5.New()
+	hasher.Write([]byte(s))
+	return hex.EncodeToString(hasher.Sum(nil))
 }

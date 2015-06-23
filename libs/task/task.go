@@ -31,7 +31,7 @@ type Task struct {
 	//lastCrawlTime
 	LastCrawlTime uint32
 	//updateTime
-	UpdateTime uint32
+	UpdateTime int64
 }
 
 // NewTask the task
@@ -48,7 +48,7 @@ func NewTask(oURL string, project string, priority uint, retry uint, method stri
 		Header:        header,
 		Data:          data,
 		LastCrawlTime: 1,
-		UpdateTime:    uint32(time.Now().Second()),
+		UpdateTime:    time.Now().Unix(),
 	}
 }
 

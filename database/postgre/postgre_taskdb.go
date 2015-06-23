@@ -16,11 +16,6 @@ type TaskDB struct {
 	Connection   gorm.DB
 }
 
-// GenerateTabelName to
-func GenerateTabelName(project string) string {
-	return project
-}
-
 // NewTaskDB create new task database
 func NewTaskDB(host string, port int, database string, user string, passwd string, projects []string) *TaskDB {
 	protocal := "postgres://"
