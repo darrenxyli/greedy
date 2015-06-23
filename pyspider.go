@@ -65,10 +65,10 @@ func main() {
 		title := s.Title
 		fmt.Println(taskid, ": ", site, ": ", url, ": ", img, ": ", title, ": ", duration)
 		resItem := result.NewResult(url, "porn", duration, site, img, title)
-		resultDB.Insert(resItem)
+		go resultDB.Insert(resItem)
 		stmt, err := db.Prepare("DELETE FROM pornhub WHERE taskid=?")
 		checkErr(err)
-		stmt.Exec(taskid)
+		go stmt.Exec(taskid)
 		checkErr(err)
 		fmt.Println("-----------------------------------")
 	}
