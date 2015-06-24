@@ -32,6 +32,8 @@ func Clear() {
 		"2jaqx97j",
 		[]string{"porn"})
 
+	defer resultDB.Connection.Close()
+
 	db, err := sql.Open("mysql", "root:2jaqx97j@tcp(104.236.34.46:3306)/resultdb")
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
