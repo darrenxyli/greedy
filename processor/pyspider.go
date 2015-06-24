@@ -1,10 +1,11 @@
-package main
+package processor
 
 import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/darrenxyli/greedy/database/postgre"
 	"github.com/darrenxyli/greedy/libs/result"
@@ -21,7 +22,7 @@ type Content struct {
 	Title    string
 }
 
-func main() {
+func Clear() {
 
 	resultDB := postgre.NewResultDB(
 		"amazon.cbtwp3cmfmsx.us-west-2.rds.amazonaws.com",
@@ -37,7 +38,7 @@ func main() {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT * FROM pornhub")
+	rows, err := db.Query("SELECT * FROM 4porn_latest")
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
 	}
@@ -55,22 +56,27 @@ func main() {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}
 
-		var s Content
-		json.Unmarshal([]byte(content), &s)
-		url = s.URL
-		dur, _ := strconv.Atoi(s.Duration)
-		duration := uint(dur)
-		site := s.Site
-		img := s.Img
-		title := s.Title
-		fmt.Println(taskid, ": ", site, ": ", url, ": ", img, ": ", title, ": ", duration)
-		resItem := result.NewResult(url, "porn", duration, site, img, title)
-		go resultDB.Insert(resItem)
-		stmt, err := db.Prepare("DELETE FROM pornhub WHERE taskid=?")
+		var contents []Content
+		json.Unmarshal([]byte(content), &contents)
+
+		for _, s := range contents {
+			url = s.URL
+			dur, _ := strconv.Atoi(s.Duration)
+			duration := uint(dur)
+			site := s.Site
+			img := s.Img
+			title := s.Title
+			fmt.Println(taskid, ": ", site, ": ", url, ": ", img, ": ", title, ": ", duration)
+			resItem := result.NewResult(url, "porn", duration, site, img, title)
+			go resultDB.Insert(resItem)
+		}
+
+		stmt, err := db.Prepare("DELETE FROM 4porn_latest WHERE taskid=?")
 		checkErr(err)
 		go stmt.Exec(taskid)
 		checkErr(err)
 		fmt.Println("-----------------------------------")
+		time.Sleep(time.Second * 1)
 	}
 	if err = rows.Err(); err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app

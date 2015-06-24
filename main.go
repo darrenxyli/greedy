@@ -1,15 +1,19 @@
 package main
 
-import (
-	// "fmt"
+import
+// "fmt"
+(
 	"runtime"
-	// "sync"
 
-	// "github.com/darrenxyli/greedy/database/postgre"
-	// dedis "github.com/darrenxyli/greedy/database/redis"
-	"github.com/darrenxyli/greedy/web"
-	// _ "github.com/lib/pq"
+	"github.com/darrenxyli/greedy/processor"
 )
+
+// "sync"
+
+// "github.com/darrenxyli/greedy/database/postgre"
+// dedis "github.com/darrenxyli/greedy/database/redis"
+
+// _ "github.com/lib/pq"
 
 // 生成连接池
 
@@ -38,7 +42,8 @@ import (
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	web.Run()
+	processor.Clear()
+	// web.Run()
 	// var wg sync.WaitGroup
 	//
 	// wg.Add(1)
