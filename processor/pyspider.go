@@ -40,7 +40,7 @@ func Clear() {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT * FROM 4porn_latest")
+	rows, err := db.Query("SELECT * FROM spankwire")
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
 	}
@@ -73,7 +73,7 @@ func Clear() {
 			go resultDB.Insert(resItem)
 		}
 
-		stmt, err := db.Prepare("DELETE FROM 4porn_latest WHERE taskid=?")
+		stmt, err := db.Prepare("DELETE FROM spankwire WHERE taskid=?")
 		checkErr(err)
 		go stmt.Exec(taskid)
 		checkErr(err)
