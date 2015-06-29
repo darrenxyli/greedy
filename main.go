@@ -5,7 +5,7 @@ import
 (
 	"runtime"
 
-	"github.com/darrenxyli/greedy/processor"
+	"github.com/darrenxyli/greedy/api"
 )
 
 // "sync"
@@ -42,7 +42,8 @@ import
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	processor.Clear()
+	api.Run()
+	// processor.Clear()
 	// web.Run()
 	// var wg sync.WaitGroup
 	//

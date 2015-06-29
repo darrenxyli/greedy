@@ -1,0 +1,56 @@
+# MySQL address, user and password
+# user must have replication privilege in MySQL.
+my_addr = "davis.cbtwp3cmfmsx.us-west-2.rds.amazonaws.com:3306"
+my_user = "darrenxyli"
+my_pass = "2jaqx97j"
+
+# Elasticsearch address
+es_addr = "192.80.146.5:9200"
+
+# Path to store data, like master.info, and dump MySQL data 
+data_dir = "~/playground"
+
+# Inner Http status address
+stat_addr = "127.0.0.1:12800"
+
+# pseudo server id like a slave 
+server_id = 1001
+
+# mysql or mariadb
+flavor = "mysql"
+
+# mysqldump execution path
+mysqldump = "mysqldump"
+
+# MySQL data source
+[[source]]
+schema = "ocean"
+
+# Only below tables will be synced into Elasticsearch.
+# "test_river_[0-9]{4}" is a wildcard table format, you can use it if you have many sub tables, like table_0000 - table_1023
+# I don't think it is necessary to sync all tables in a database.
+tables = ["porn"]
+
+# Below is for special rule mapping
+[[rule]]
+schema = "ocean"
+table = "porn"
+index = "porn_index"
+type = "porn"
+
+    # title is MySQL test_river field name, es_title is the customized name in Elasticsearch
+    [rule.field]
+    id = "_id"
+
+# wildcard table rule, the wildcard table must be in source tables 
+[[rule]]
+schema = "test"
+table = "test_river_[0-9]{4}"
+index = "river"
+type = "river"
+
+    # title is MySQL test_river field name, es_title is the customized name in Elasticsearch
+    [rule.field]
+    title = "es_title"
+
+
