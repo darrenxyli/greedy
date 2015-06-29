@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/darrenxyli/greedy/api/model"
 	"github.com/jinzhu/gorm"
@@ -56,6 +57,27 @@ func (projectdb *ProjectDB) Insert() bool {
 	// success := projectdb.Connection.Table(ta.Project).NewRecord(*ta)
 	// projectdb.Connection.Table(ta.Project).Create(ta)
 	return true
+}
+
+// GetHotTopics get recent hot topics, in recent 1 week
+func (projectdb *ProjectDB) GetHotTopics() []model.Topic {
+	var topics []model.Topic
+	projectdb.Connection.Where("lasted_modified > ?", time.Now().Unix()-604796).Order("replies desc").Limit(20).Find(&topics)
+	return topics
+}
+
+// GetLastedTopics get recent hot topics
+func (projectdb *ProjectDB) GetLastedTopics() []model.Topic {
+	var topics []model.Topic
+	projectdb.Connection.Order("lasted_modified desc").Limit(20).Find(&topics)
+	return topics
+}
+
+// GetAllNodes returns all nodes
+func (projectdb *ProjectDB) GetAllNodes() []model.Node {
+	var nodes []model.Node
+	projectdb.Connection.Find(&nodes)
+	return nodes
 }
 
 // GetNodeByName get node information
@@ -150,4 +172,19 @@ func (projectdb *ProjectDB) GetReyliesByTopicID(ID string) []model.Reply {
 	topicID, _ := strconv.Atoi(ID)
 	projectdb.Connection.Where("topic_id = ?", int64(topicID)).Find(&replies)
 	return replies
+}
+
+// IncreaseRepliesCounter increase replies
+func (projectdb *ProjectDB) IncreaseRepliesCounter(ID string) {
+	topicID, _ := strconv.Atoi(ID)
+	projectdb.Connection.Table("topics").Where("id = ?", int64(topicID)).Updates(map[string]interface{}{
+		"replies":         gorm.Expr("replies + ?", 1),
+		"lasted_modified": time.Now().Unix()})
+}
+
+// IncreaseTopicsCounter increase topics
+func (projectdb *ProjectDB) IncreaseTopicsCounter(ID string) {
+	nodeID, _ := strconv.Atoi(ID)
+	projectdb.Connection.Table("nodes").Where("id = ?", int64(nodeID)).Updates(map[string]interface{}{
+		"topics": gorm.Expr("topics + ?", 1)})
 }

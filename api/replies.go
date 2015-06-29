@@ -67,7 +67,7 @@ func createReply(c *gin.Context) {
 			Created:  time.Now().Unix(),
 		}
 
-		if flag := DB.CreateReply(reply); flag {
+		if DB.CreateReply(reply) && increReplies(replyTopicID) {
 			c.JSON(http.StatusOK, model.CreateSuccessResponse(""))
 		} else {
 			c.JSON(http.StatusConflict, model.ItemExistErrorResponse(""))

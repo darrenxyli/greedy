@@ -8,6 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func getNodes(c *gin.Context) {
+	nodes := DB.GetAllNodes()
+	// response := model.Response{Status: "found", Result: nodes}
+	// Get node information from database
+	c.JSON(http.StatusOK, nodes)
+}
+
 func getNode(c *gin.Context) {
 	nodeName := c.Param("name")
 
@@ -36,4 +43,9 @@ func createNode(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusConflict, model.ItemExistErrorResponse(result))
 	}
+}
+
+func increTopics(nodeID string) bool {
+	DB.IncreaseTopicsCounter(nodeID)
+	return true
 }

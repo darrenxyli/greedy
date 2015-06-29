@@ -34,7 +34,13 @@ func Run() {
 
 	v1 := router.Group("/v1")
 	{
-		// GET information of particular node or all nodes
+		// GET hot topics
+		v1.GET("/hot/topics", getHotTopics)
+		// GET lasted topics
+		v1.GET("/lasted/topics", getLastedTopics)
+		// GET all nodes
+		v1.GET("/nodes", getNodes)
+		// GET information of particular node
 		v1.GET("/nodes/:name", getNode)
 		// POST to create a new node
 		v1.POST("/nodes", createNode)
